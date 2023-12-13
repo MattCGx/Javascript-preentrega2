@@ -3,6 +3,14 @@ console.log(
      ============================================================ `
 );
 
+// Defino Variables globales
+let menuPpalState = true;
+let menuAgState;
+let menuTareasState;
+let menuInsumosState;
+
+// =================================================================
+
 // Defino funciones globales
 
 function generarLegajo(agentes) {
@@ -12,6 +20,8 @@ function generarLegajo(agentes) {
   }
   return legajo;
 }
+
+// =================================================================
 
 // Defino clases
 
@@ -42,11 +52,7 @@ class Insumo {
   }
 }
 
-// Defino Variables globales
-let menuPpalState = true;
-let menuAgState;
-let menuTareasState;
-let menuInsumosState;
+// =================================================================
 
 // Arrays de Ejemplo iniciales
 
@@ -83,7 +89,7 @@ let agentes = [
   },
   {
     nombre: "LAURA GÓMEZ",
-    posicion: "Encargado",
+    posicion: "Operador",
     sector: "Ventas",
     legajo: 4321,
   },
@@ -101,13 +107,13 @@ let agentes = [
   },
   {
     nombre: "ROBERTO TORRES",
-    posicion: "Encargado",
+    posicion: "Operador",
     sector: "Ventas",
     legajo: 6789,
   },
   {
     nombre: "SOFÍA RAMÍREZ",
-    posicion: "Supervisor",
+    posicion: "Encargado",
     sector: "Fabricación",
     legajo: 1098,
   },
@@ -184,6 +190,8 @@ let insumos = [
   { nombreInsumo: "CINTA ADHESIVA", tipoInsumo: "Administrativo", stock: 150 },
 ];
 
+// =================================================================
+
 // ciclo menu principal
 
 const menuInicio = () => {
@@ -198,41 +206,40 @@ const menuInicio = () => {
         4- Salir
         `)
     );
-  }
-
-  switch (seleccion) {
-    case 1:
-      menuAgentes();
-      break;
-    case 2:
-      menuTareas();
-      break;
-    case 3:
-      menuInsumos();
-      break;
-    case 4:
-      alert("Gracias por usar Nuestro servicio.");
-      menuPpalState = false;
-      break;
-    default:
-      alert("Seleccion inválida, por favor indique nuevamente la opción");
-      break;
+    switch (seleccion) {
+      case 1:
+        menuAgentes();
+        break;
+      case 2:
+        menuTareas();
+        break;
+      case 3:
+        menuInsumos();
+        break;
+      case 4:
+        alert("Cerrando Sesion");
+        menuPpalState = false;
+        break;
+      default:
+        alert("Seleccion inválida, por favor indique nuevamente la opción");
+        break;
+    }
   }
 };
 
-// Ciclo menu modulo usuarios
+// Ciclo menu modulo agentes
 
 const menuAgentes = () => {
   menuAgState = true;
   while (menuAgState) {
     let seleccionAg = parseInt(
-      prompt(` Nómina de Empleados de Quimishop SRL.
-
-        1- Ver Nómina
-        2- Administrar Agente
-        3- Alta Nuevo Agente  
-        4- Baja Agente      
-        5- Salir
+      prompt(` Administrar nómina de empleados.
+      
+        1- Ver nómina
+        2- Administrar agente
+        3- Alta nuevo agente  
+        4- Baja agente      
+        5- Volver
         `)
     );
     switch (seleccionAg) {
@@ -259,10 +266,106 @@ const menuAgentes = () => {
   }
 };
 
+// Funciones Menu Agentes
+
+const verNomina = () => {
+  let seleccionNomina = parseInt(
+    prompt(` Nómina de Empleados de Quimishop SRL.
+
+    Conteo Total de empleados: ${agentes.length}
+    
+      1- Nómina Completa
+      2- Sector Ventas
+      3- Sector Reposición 
+      4- Sector Fabricación  
+      5- Sector Facturación    
+      6- Volver
+      `)
+  );
+  switch (seleccionNomina) {
+    case 1:
+      let nomina = agentes.map(
+        (agente) =>
+          `${agente.nombre} - ${agente.posicion} en ${agente.sector} - Legajo: ${agente.legajo} `
+      );
+      if (nomina.length > 0) {
+        alert(nomina.join("\n"));
+      } else {
+        alert("Sin agentes activos");
+      }
+      break;
+    case 2:
+      let nominaVentas = agentes.filter((agente) => agente.sector === "Ventas");
+      let mostrarVentas = nominaVentas.map(
+        (agente) =>
+          `${agente.nombre} - ${agente.posicion} en ${agente.sector} - Legajo: ${agente.legajo} `
+      );
+      if (mostrarVentas.length > 0) {
+        alert(mostrarVentas.join("\n"));
+      } else {
+        alert("Sin agentes activos en el sector");
+      }
+      break;
+    case 3:
+      let nominaRepo = agentes.filter(
+        (agente) => agente.sector === "Reposición"
+      );
+      let mostrarRepo = nominaRepo.map(
+        (agente) =>
+          `${agente.nombre} - ${agente.posicion} en ${agente.sector} - Legajo: ${agente.legajo} `
+      );
+      if (mostrarRepo.length > 0) {
+        alert(mostrarRepo.join("\n"));
+      } else {
+        alert("Sin agentes activos en el sector");
+      }
+      break;
+    case 4:
+      let nominaFab = agentes.filter(
+        (agente) => agente.sector === "Fabricación"
+      );
+      let mostrarFab = nominaFab.map(
+        (agente) =>
+          `${agente.nombre} - ${agente.posicion} en ${agente.sector} - Legajo: ${agente.legajo} `
+      );
+      if (mostrarFab.length > 0) {
+        alert(mostrarFab.join("\n"));
+      } else {
+        alert("Sin agentes activos en el sector");
+      }
+      break;
+    case 5:
+      let nominaFact = agentes.filter(
+        (agente) => agente.sector === "Facturación"
+      );
+      let mostrarFact = nominaFact.map(
+        (agente) =>
+          `${agente.nombre} - ${agente.posicion} en ${agente.sector} - Legajo: ${agente.legajo} `
+      );
+      if (mostrarFact.length > 0) {
+        alert(mostrarFact.join("\n"));
+      } else {
+        alert("Sin agentes activos en el sector");
+      }
+      break;
+    case 6:
+      alert("Volviendo al Menu de Administracion de Agentes");
+      break;
+    default:
+      alert("Seleccion inválida, por favor indique nuevamente la opción");
+      break;
+  }
+};
+
+const administrarAgente = () => {};
+
+const altaAgente = () => {};
+
+const bajaAgente = () => {};
+
 // Ciclo menu modulo tareas
 
 const menuTareas = () => {
-
   menuTareasState = true;
   while (menuTareasState) {
     let seleccionTarea = parseInt(
@@ -297,7 +400,6 @@ const menuTareas = () => {
         break;
     }
   }
-
 };
 
 // Ciclo menu modulo insumos
@@ -337,5 +439,6 @@ const menuInsumos = () => {
         break;
     }
   }
-
 };
+
+menuInicio();
