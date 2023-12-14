@@ -172,6 +172,7 @@ const generarLegajo = (agentes) => {
     legajo = Math.floor(Math.random() * 9000) + 1000;
   } while (agentes.some((agente) => agente.legajo === legajo));
 
+  console.log(`se genera legajo aleatorio para el nuevo agente comprobando que no exista en el array: ${legajo}`);
   return legajo;
 };
 
@@ -179,7 +180,9 @@ const generarLegajo = (agentes) => {
 // ciclo menu principal
 
 const menuInicio = () => {
+  console.log("Ingreso a menu principal \n =================================");
   while (menuPpalState) {
+    console.log("Solicitud de opcion de modulo a administrar");
     let seleccion = parseInt(
       prompt(`Sistema de Administración de Quimishop SRL. 
         Por favor elija una opción para continuar:
@@ -192,19 +195,24 @@ const menuInicio = () => {
     );
     switch (seleccion) {
       case 1:
+        console.log("seleccionada opcion 1: Modulo Agentes");
         menuAgentes();
         break;
       case 2:
+        console.log("seleccionada opcion 2: Modulo Tareas");
         menuTareas();
         break;
       case 3:
+        console.log("seleccionada opcion 3: Modulo Insumos");
         menuInsumos();
         break;
       case 4:
+        console.log("seleccionada opcion 4: Salir Y terminar aplicacion");
         alert("Cerrando Sesion");
         menuPpalState = false;
         break;
       default:
+        console.log(`el usuario ingresa: ${seleccion}. Fuera del rango de opciones de menu o no es un número.`);
         alert("Seleccion inválida, por favor indique nuevamente la opción");
         break;
     }
@@ -214,8 +222,12 @@ const menuInicio = () => {
 // Ciclo menu modulo agentes
 
 const menuAgentes = () => {
+  console.log(`====================
+  Ingreso al Menu de Agentes
+  ==================`);
   menuAgState = true;
   while (menuAgState) {
+    console.log("solicitud de opcion de funcionalidad del menu.");
     let seleccionAg = parseInt(
       prompt(` Administrar nómina de empleados.
       
@@ -227,19 +239,24 @@ const menuAgentes = () => {
     );
     switch (seleccionAg) {
       case 1:
+        console.log("seleccionada opcion 1: ver nomina (array completo y filtrado por sectores)");
         verNomina();
         break;
       case 2:
+        console.log("seleccionada opcion 2: agregar Agente");
         altaAgente();
         break;
       case 3:
+        console.log("seleccionada opcion 3: Eliminar Agente");
         bajaAgente();
         break;
       case 4:
+        console.log("seleccionada opcion 4: Termina el ciclo y ejecuta la funcion menuInicio para volver al menu anterior");
         menuInicio();
         menuAgState = false;
         break;
       default:
+        console.log(`el usuario ingresa: ${seleccionAg}. Fuera del rango de opciones de menu o no es un número.`);
         alert("Seleccion inválida, por favor indique nuevamente la opción");
         break;
     }
@@ -659,7 +676,7 @@ const agregarTarea = () => {
         break;
     }
   }
-  let tarea = new Tarea(descripcion, tipoTarea, prioridad);
+  let tarea = new Tarea(tipoTarea, prioridad, descripcion);
   tareas.push(tarea);
   tareaID++;
 
