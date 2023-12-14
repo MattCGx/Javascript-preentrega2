@@ -735,7 +735,9 @@ const agregarTarea = () => {
         tipoTarea = "Facturación";
         break;
       default:
-        console.log(`El dato ingresado no es valido entre las opciones disponibles: ${selecTipo}}`);
+        console.log(
+          `El dato ingresado no es valido entre las opciones disponibles: ${selecTipo}}`
+        );
         alert("Opción inexistente");
         break;
     }
@@ -777,7 +779,9 @@ const agregarTarea = () => {
         prioridad = "Urgente";
         break;
       default:
-        console.log(`El dato ingresado no es valido entre las opciones disponibles: ${selecPrio}}`);
+        console.log(
+          `El dato ingresado no es valido entre las opciones disponibles: ${selecPrio}}`
+        );
         alert("Opción inexistente");
         break;
     }
@@ -792,7 +796,7 @@ const agregarTarea = () => {
   ${tarea}
   ---------
   `);
-  
+
   alert(` Se ha ingresado la nueva tarea a la lista de pendientes:
 
 ========================
@@ -807,7 +811,9 @@ Fecha: ${tarea.creacion}
 
 const tareaRealizada = () => {
   let confirmarTarea = false;
-  console.log("modulo marcar tarea\n Solicita el ID de la tarea que se desea marcar como completada y brinda informacion de la misma. Chequeando previamente que exista");
+  console.log(
+    "modulo marcar tarea\n Solicita el ID de la tarea que se desea marcar como completada y brinda informacion de la misma. Chequeando previamente que exista"
+  );
   let tareaBuscada = parseInt(
     prompt(`Ingrese el ID de la tarea que desea revisar`)
   );
@@ -818,7 +824,9 @@ const tareaRealizada = () => {
   ) {
     while (!confirmarTarea) {
       const marcarTarea = tareas.find((tarea) => tarea.id === tareaBuscada);
-      console.log("Solicita confirmación para cambiar el estado de la tarea seleccionada a 'completada'.");
+      console.log(
+        "Solicita confirmación para cambiar el estado de la tarea seleccionada a 'completada'."
+      );
       let opcion = parseInt(
         prompt(`
 Desea marcar la tarea como completada y eliminarla de la lista de pendientes?
@@ -854,7 +862,9 @@ Estado: ${marcarTarea.estado}
           confirmarTarea = true;
           break;
         case 2:
-          console.log("cancela la operación, la tarea mantiene su estado original 'pendiente'.");
+          console.log(
+            "cancela la operación, la tarea mantiene su estado original 'pendiente'."
+          );
           alert(`La tarea:
   ----------------
 ID: ${marcarTarea.id}
@@ -868,7 +878,9 @@ Estado: ${marcarTarea.estado}
           confirmarTarea = true;
           break;
         default:
-          console.log("el usuario ingresa un valor incorrecto o fuera del rango");
+          console.log(
+            "el usuario ingresa un valor incorrecto o fuera del rango"
+          );
           alert("Opcion invalida");
           break;
       }
@@ -910,9 +922,7 @@ const menuInsumos = () => {
         administrarInsumos();
         break;
       case 3:
-        console.log(
-          "seleccionada opcion 3: agregar Insumo nuevo"
-        );
+        console.log("seleccionada opcion 3: agregar Insumo nuevo");
         agregarInsumos();
         break;
       case 4:
@@ -949,7 +959,9 @@ const verInsumos = () => {
   );
   switch (opcionVistaInsumos) {
     case 1:
-      console.log("opcion 1: vista completa. Lista Generada a partir de un map del array original");
+      console.log(
+        "opcion 1: vista completa. Lista Generada a partir de un map del array original"
+      );
       let listaInsumos = insumos.map(
         (objeto) =>
           `${objeto.tipoInsumo}: ${objeto.nombreInsumo} - Stock: ${objeto.stock} unidades`
@@ -961,7 +973,9 @@ const verInsumos = () => {
       }
       break;
     case 2:
-      console.log("opcion 2: vista administrativo. Lista Generada a partir de un map del array original filtrado por tipo");
+      console.log(
+        "opcion 2: vista administrativo. Lista Generada a partir de un map del array original filtrado por tipo"
+      );
       let filtroAdmin = insumos.filter(
         (objeto) => objeto.tipoInsumo === "Administrativo"
       );
@@ -976,7 +990,9 @@ const verInsumos = () => {
       }
       break;
     case 3:
-      console.log("opcion 3: vista Fabricación. Lista Generada a partir de un map del array original filtrado por tipo");
+      console.log(
+        "opcion 3: vista Fabricación. Lista Generada a partir de un map del array original filtrado por tipo"
+      );
       let filtroFabricacion = insumos.filter(
         (objeto) => objeto.tipoInsumo === "Fabricación"
       );
@@ -991,7 +1007,9 @@ const verInsumos = () => {
       }
       break;
     case 4:
-      console.log("opcion 4: vista Materia Prima. Lista Generada a partir de un map del array original filtrado por tipo");
+      console.log(
+        "opcion 4: vista Materia Prima. Lista Generada a partir de un map del array original filtrado por tipo"
+      );
       let filtroMaterias = insumos.filter(
         (objeto) => objeto.tipoInsumo === "Materias Primas"
       );
@@ -1006,7 +1024,9 @@ const verInsumos = () => {
       }
       break;
     case 5:
-      console.log("opcion 5: vista faltantes. Lista Generada a partir de un map del array original filtrado por stock");
+      console.log(
+        "opcion 5: vista faltantes. Lista Generada a partir de un map del array original filtrado por stock"
+      );
       let filtroFaltantes = insumos.filter((objeto) => objeto.stock === 0);
       let listaFaltantes = filtroFaltantes.map(
         (objeto) =>
@@ -1111,13 +1131,15 @@ const agregarInsumos = () => {
   let stocknuevoInsumo;
   let selecCategoria;
 
-console.log("Iniciado modulo para agregar nuevos insumos");
+  console.log("Iniciado modulo para agregar nuevos insumos");
 
   do {
     nombreNuevoInsumo = prompt(
       "Indique el nombre del insumo a agregar:"
     ).toUpperCase();
-    console.log("solicita nombre del insumo chequeando que no sea un numero o esté vacío. En caso de ser inválido, volverá a pedir el dato");
+    console.log(
+      "solicita nombre del insumo chequeando que no sea un numero o esté vacío. En caso de ser inválido, volverá a pedir el dato"
+    );
   } while (!isNaN(nombreNuevoInsumo) || nombreNuevoInsumo === null);
 
   while (
@@ -1126,7 +1148,9 @@ console.log("Iniciado modulo para agregar nuevos insumos");
     selecCategoria < 1 ||
     selecCategoria > 3
   ) {
-    console.log("solicita seleccion de categoria para el insumo ingresado entre 3 opciones");
+    console.log(
+      "solicita seleccion de categoria para el insumo ingresado entre 3 opciones"
+    );
     selecCategoria = parseInt(
       prompt(`Seleccione el tipo de tarea para su clasificación:
 
@@ -1159,7 +1183,9 @@ console.log("Iniciado modulo para agregar nuevos insumos");
     stocknuevoInsumo = parseInt(
       prompt("Indique la cantidad del insumo a agregar:")
     );
-    console.log("solicita el stock del insumo chequeando que sea un numero y no esté vacío. En caso de ser inválido, volverá a pedir el dato");
+    console.log(
+      "solicita el stock del insumo chequeando que sea un numero y no esté vacío. En caso de ser inválido, volverá a pedir el dato"
+    );
   } while (isNaN(stocknuevoInsumo) || stocknuevoInsumo === null);
 
   let nuevoInsumo = new Insumo(
@@ -1168,7 +1194,9 @@ console.log("Iniciado modulo para agregar nuevos insumos");
     stocknuevoInsumo
   );
   insumos.push(nuevoInsumo);
-console.log("crea el insumo a partir de su funcion constructor, lo agrega al array y muestra los datos del mismo");
+  console.log(
+    "crea el insumo a partir de su funcion constructor, lo agrega al array y muestra los datos del mismo"
+  );
   alert(
     `Se agregaron ${nuevoInsumo.stock} unidades de ${nuevoInsumo.nombreInsumo} a la lista, bajo la categoria ${nuevoInsumo.tipoInsumo}`
   );
