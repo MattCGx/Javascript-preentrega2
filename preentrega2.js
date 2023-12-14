@@ -528,6 +528,7 @@ const bajaAgente = () => {
 
       switch (confirmacion) {
         case 1:
+          console.log(`Se confirma eliminacion del agente ${agentePorLegajo.nombre}`);
           alert(
             `Se eliminó el agente: ${agentePorLegajo.nombre} del sector ${agentePorLegajo.sector}`
           );
@@ -537,6 +538,7 @@ const bajaAgente = () => {
           confirmar = true;
           break;
         case 2:
+          console.log(`Se cancela eliminacion del agente ${agentePorLegajo.nombre}`);
           alert("Baja Cancelada");
           confirmar = true;
           break;
