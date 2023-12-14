@@ -898,7 +898,7 @@ const menuInsumos = () => {
   Ingreso al Menu de Insumos
   ==================`);
   while (menuInsumosState) {
-    console.log("solicitud de opción de funcionalidad del menu de Agentes.");
+    console.log("solicitud de opción de funcionalidad del menu de Insumos.");
     let seleccionInsumos = parseInt(
       prompt(` Listado de Stock de Insumos:
 
