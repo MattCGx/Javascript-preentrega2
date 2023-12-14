@@ -172,7 +172,9 @@ const generarLegajo = (agentes) => {
     legajo = Math.floor(Math.random() * 9000) + 1000;
   } while (agentes.some((agente) => agente.legajo === legajo));
 
-  console.log(`se genera legajo aleatorio para el nuevo agente comprobando que no exista en el array: ${legajo}`);
+  console.log(
+    `se genera legajo aleatorio para el nuevo agente comprobando que no exista en el array: ${legajo}`
+  );
   return legajo;
 };
 
@@ -212,7 +214,9 @@ const menuInicio = () => {
         menuPpalState = false;
         break;
       default:
-        console.log(`el usuario ingresa: ${seleccion}. Fuera del rango de opciones de menu o no es un número.`);
+        console.log(
+          `el usuario ingresa: ${seleccion}. Fuera del rango de opciones de menu o no es un número.`
+        );
         alert("Seleccion inválida, por favor indique nuevamente la opción");
         break;
     }
@@ -227,7 +231,7 @@ const menuAgentes = () => {
   ==================`);
   menuAgState = true;
   while (menuAgState) {
-    console.log("solicitud de opcion de funcionalidad del menu.");
+    console.log("solicitud de opción de funcionalidad del menu de Agentes.");
     let seleccionAg = parseInt(
       prompt(` Administrar nómina de empleados.
       
@@ -239,7 +243,9 @@ const menuAgentes = () => {
     );
     switch (seleccionAg) {
       case 1:
-        console.log("seleccionada opcion 1: ver nomina (array completo y filtrado por sectores)");
+        console.log(
+          "seleccionada opcion 1: ver nomina (array completo y filtrado por sectores)"
+        );
         verNomina();
         break;
       case 2:
@@ -251,12 +257,16 @@ const menuAgentes = () => {
         bajaAgente();
         break;
       case 4:
-        console.log("seleccionada opcion 4: Termina el ciclo y ejecuta la funcion menuInicio para volver al menu anterior");
+        console.log(
+          "seleccionada opcion 4: Termina el ciclo y ejecuta la funcion menuInicio para volver al menu anterior"
+        );
         menuInicio();
         menuAgState = false;
         break;
       default:
-        console.log(`el usuario ingresa: ${seleccionAg}. Fuera del rango de opciones de menu o no es un número.`);
+        console.log(
+          `el usuario ingresa: ${seleccionAg}. Fuera del rango de opciones de menu o no es un número.`
+        );
         alert("Seleccion inválida, por favor indique nuevamente la opción");
         break;
     }
@@ -266,7 +276,9 @@ const menuAgentes = () => {
 // Funciones Menu Agentes
 
 const verNomina = () => {
-  console.log("Modulo visualizacion de Nomina\n Se solicita opcion del 1 al 6 para visualizar arrays entero o filtrado por sectores");
+  console.log(
+    "Modulo visualizacion de Nomina\n Se solicita opcion del 1 al 6 para visualizar arrays entero o filtrado por sectores"
+  );
   let seleccionNomina = parseInt(
     prompt(` Nómina de Empleados de Quimishop SRL.
 
@@ -282,7 +294,9 @@ const verNomina = () => {
   );
   switch (seleccionNomina) {
     case 1:
-      console.log("opcion 1: visualiza nomina completa a partir de un mapeo del array original");
+      console.log(
+        "opcion 1: visualiza nomina completa a partir de un mapeo del array original"
+      );
       let nomina = agentes.map(
         (agente) =>
           `${agente.nombre} - ${agente.posicion} en ${agente.sector} - Legajo: ${agente.legajo} `
@@ -294,7 +308,9 @@ const verNomina = () => {
       }
       break;
     case 2:
-      console.log("opcion 2: visualiza ventas a partir de un mapeo del array original filtrado por la propiedad sector, verificando si hay o no agentes en dicho sector");
+      console.log(
+        "opcion 2: visualiza ventas a partir de un mapeo del array original filtrado por la propiedad sector, verificando si hay o no agentes en dicho sector"
+      );
       let nominaVentas = agentes.filter((agente) => agente.sector === "Ventas");
       let mostrarVentas = nominaVentas.map(
         (agente) =>
@@ -307,7 +323,9 @@ const verNomina = () => {
       }
       break;
     case 3:
-      console.log("opcion 3: visualiza reposición a partir de un mapeo del array original filtrado por la propiedad sector, verificando si hay o no agentes en dicho sector");
+      console.log(
+        "opcion 3: visualiza reposición a partir de un mapeo del array original filtrado por la propiedad sector, verificando si hay o no agentes en dicho sector"
+      );
       let nominaRepo = agentes.filter(
         (agente) => agente.sector === "Reposición"
       );
@@ -322,7 +340,9 @@ const verNomina = () => {
       }
       break;
     case 4:
-      console.log("opcion 4: visualiza fabricación a partir de un mapeo del array original filtrado por la propiedad sector, verificando si hay o no agentes en dicho sector");
+      console.log(
+        "opcion 4: visualiza fabricación a partir de un mapeo del array original filtrado por la propiedad sector, verificando si hay o no agentes en dicho sector"
+      );
       let nominaFab = agentes.filter(
         (agente) => agente.sector === "Fabricación"
       );
@@ -337,7 +357,9 @@ const verNomina = () => {
       }
       break;
     case 5:
-      console.log("opcion 5: visualiza facturación a partir de un mapeo del array original filtrado por la propiedad sector, verificando si hay o no agentes en dicho sector");
+      console.log(
+        "opcion 5: visualiza facturación a partir de un mapeo del array original filtrado por la propiedad sector, verificando si hay o no agentes en dicho sector"
+      );
       let nominaFact = agentes.filter(
         (agente) => agente.sector === "Facturación"
       );
@@ -352,11 +374,15 @@ const verNomina = () => {
       }
       break;
     case 6:
-      console.log("opcion 6: Cancela la visualizacion, solo ejecuta una alerta y devuelve al menu anterior");
+      console.log(
+        "opcion 6: Cancela la visualizacion, solo ejecuta una alerta y devuelve al menu anterior"
+      );
       alert("Volviendo al Menu de Administracion de Agentes");
       break;
     default:
-      console.log(`el usuario ingresa: ${seleccionNomina}. Fuera del rango de opciones de menu o no es un número.`);
+      console.log(
+        `el usuario ingresa: ${seleccionNomina}. Fuera del rango de opciones de menu o no es un número.`
+      );
       alert("Seleccion inválida, por favor indique nuevamente la opción");
       break;
   }
@@ -368,7 +394,7 @@ const altaAgente = () => {
   let sector;
   let selecPosicion;
   let selecSector;
-console.log("Modulo de creación de nuevo agente");
+  console.log("Modulo de creación de nuevo agente");
   do {
     nombre = prompt("Indique nombre y apellido del nuevo agente").toUpperCase();
     console.log(`Solicita nombre y apellido al usuario, si este ingresa un dato no-válido, volver a solicitarlo."
@@ -451,7 +477,7 @@ console.log("Modulo de creación de nuevo agente");
   }
   let agente = new Agente(nombre, posicion, sector);
   agentes.push(agente);
-console.log( `Creado el nuevo agente:
+  console.log(`Creado el nuevo agente:
 ${agente} 
 y se muestran sus datos por alert`);
   alert(` Se ha ingresado al nuevo agente a la base de datos:
@@ -468,7 +494,9 @@ Legajo: ${agente.legajo}
 const bajaAgente = () => {
   console.log("Modulo baja de agentes");
   let confirmar = false;
-  console.log("solicita NOMBRE o LEGAJO y verifica el tipo de dato ingresado para coincidir con una u otra opción.");
+  console.log(
+    "solicita NOMBRE o LEGAJO y verifica el tipo de dato ingresado para coincidir con una u otra opción."
+  );
   let agenteEliminado = prompt(
     "Ingrese el NOMBRE o el numero de LEGAJO del agente que desea dar de baja"
   );
@@ -477,8 +505,9 @@ const bajaAgente = () => {
     !isNaN(agenteEliminado) &&
     agentes.some((agente) => agente.legajo === parseInt(agenteEliminado))
   ) {
-
-    console.log(`Se determina Agente ingresado por LEGAJO ${agenteEliminado}, se identifica su existencia y se solicita confirmación antes de eliminar`);
+    console.log(
+      `Se determina Agente ingresado por LEGAJO ${agenteEliminado}, se identifica su existencia y se solicita confirmación antes de eliminar`
+    );
     while (!confirmar) {
       const agentePorLegajo = agentes.find(
         (agente) => agente.legajo === parseInt(agenteEliminado)
@@ -520,8 +549,9 @@ const bajaAgente = () => {
     isNaN(agenteEliminado) &&
     agentes.some((agente) => agente.nombre === agenteEliminado.toUpperCase())
   ) {
-
-    console.log(`Se determina Agente ingresado por NOMBRE: ${agenteEliminado.toUpperCase()}, se identifica su existencia y se solicita confirmacion antes de eliminar`);
+    console.log(
+      `Se determina Agente ingresado por NOMBRE: ${agenteEliminado.toUpperCase()}, se identifica su existencia y se solicita confirmacion antes de eliminar`
+    );
     while (!confirmar) {
       const agentePorNombre = agentes.find(
         (agente) => agente.nombre === agenteEliminado.toUpperCase()
@@ -558,13 +588,17 @@ const bajaAgente = () => {
           confirmar = true;
           break;
         default:
-          console.log("selecciona una opcion inválida o fuera de rango de opciones");
+          console.log(
+            "selecciona una opcion inválida o fuera de rango de opciones"
+          );
           alert("Opcion inválida");
           break;
       }
     }
   } else {
-    console.log(`el dato ingresado ${agenteEliminado} no coincide con ningun NOMBRE ni LEGAJO existente.`);
+    console.log(
+      `el dato ingresado ${agenteEliminado} no coincide con ningun NOMBRE ni LEGAJO existente.`
+    );
     alert("No se encontró ningún agente con el legajo o nombre proporcionado.");
   }
 };
@@ -574,8 +608,12 @@ const bajaAgente = () => {
 // Ciclo menu modulo tareas
 
 const menuTareas = () => {
+  console.log(`====================
+  Ingreso al Menu de Tareas
+  ==================`);
   menuTareasState = true;
   while (menuTareasState) {
+    console.log("Solicitud de opción de funcionalidad del menu Tareas.");
     let seleccionTarea = parseInt(
       prompt(` Lista de tareas pendientes.
 
@@ -587,19 +625,28 @@ const menuTareas = () => {
     );
     switch (seleccionTarea) {
       case 1:
+        console.log("seleccionada opcion 1: Ver Tareas");
         verTareas();
         break;
       case 2:
+        console.log("seleccionada opcion 2: Agregar Tareas Nuevas");
         agregarTarea();
         break;
       case 3:
+        console.log("seleccionada opcion 3: Marcar tareas realizadas");
         tareaRealizada();
         break;
       case 4:
+        console.log(
+          "seleccionada opcion 4: ver nomina (array completo y filtrado por sectores)"
+        );
         menuInicio();
         menuTareasState = false;
         break;
       default:
+        console.log(
+          `el usuario ingresa: ${seleccionTarea}. Fuera del rango de opciones de menu o no es un número.`
+        );
         alert("Seleccion inválida, por favor indique nuevamente la opción");
         break;
     }
@@ -608,6 +655,9 @@ const menuTareas = () => {
 
 // Funciones Menu Tareas
 const verTareas = () => {
+  console.log(
+    "Se muestra una lista de tareas generadas a partir de un map del array completo, verificando que existan tareas en dicho array"
+  );
   let listaTareas = tareas.map(
     (tarea) =>
       `ID:${tarea.id} - ${tarea.descripcion} en ${tarea.tipo} - con prioridad: ${tarea.prioridad} - ${tarea.estado}`
@@ -619,6 +669,10 @@ const verTareas = () => {
   }
 
   if (tareasCompletadas.length > 0) {
+    console.log(
+      `se muestra una lista de tareas completadas a partir del map de un array de tareas completadas - originalmente vacío - luego de comprobar si hay elementos en el mismo. 
+      Actualmente hay ${tareasCompletadas.length} elementos. `
+    );
     let listaCompletadas = tareasCompletadas.map(
       (tarea) =>
         `ID:${tarea.id} - ${tarea.descripcion} en ${tarea.tipo} - ${tarea.estado}`
@@ -640,6 +694,9 @@ const agregarTarea = () => {
     descripcion = prompt(
       "Indique brevemente la descripción de la nueva tarea"
     ).toUpperCase();
+    console.log(
+      "solicita descripción de la tarea nueva, verificando que la misma sea texto y no esté vacia. Se repite en caso de no cumplirse lo anterior."
+    );
   } while (!isNaN(descripcion) || descripcion === null);
 
   while (
@@ -648,6 +705,9 @@ const agregarTarea = () => {
     selecTipo < 1 ||
     selecTipo > 4
   ) {
+    console.log(
+      "Solicita elegir el tipo de tarea a agregar entre 4 opciones disponibles"
+    );
     selecTipo = parseInt(
       prompt(`Seleccione el tipo de tarea para su clasificación:
 
@@ -659,18 +719,23 @@ const agregarTarea = () => {
     );
     switch (selecTipo) {
       case 1:
+        console.log("seleccionado tipo fabricación");
         tipoTarea = "Fabricación";
         break;
       case 2:
+        console.log("seleccionado tipo resposición");
         tipoTarea = "Reposición";
         break;
       case 3:
+        console.log("seleccionado tipo ventas");
         tipoTarea = "Ventas";
         break;
       case 4:
+        console.log("seleccionado tipo facturación");
         tipoTarea = "Facturación";
         break;
       default:
+        console.log(`El dato ingresado no es valido entre las opciones disponibles: ${selecTipo}}`);
         alert("Opción inexistente");
         break;
     }
@@ -682,6 +747,9 @@ const agregarTarea = () => {
     selecPrio < 1 ||
     selecPrio > 4
   ) {
+    console.log(
+      "Solicita elegir la prioridad de la tarea a agregar entre 4 opciones disponibles"
+    );
     selecPrio = parseInt(
       prompt(`Indique el nivel de prioridad de la nueva tarea.
 
@@ -693,26 +761,38 @@ const agregarTarea = () => {
     );
     switch (selecPrio) {
       case 1:
+        console.log("seleccionado prioridad baja");
         prioridad = "Baja";
         break;
       case 2:
+        console.log("seleccionado prioridad media");
         prioridad = "Media";
         break;
       case 3:
+        console.log("seleccionado prioridad alta");
         prioridad = "Alta";
         break;
       case 4:
+        console.log("seleccionado prioridad urgente");
         prioridad = "Urgente";
         break;
       default:
+        console.log(`El dato ingresado no es valido entre las opciones disponibles: ${selecPrio}}`);
         alert("Opción inexistente");
         break;
     }
   }
+  console.log("crea la tarea a partir ");
   let tarea = new Tarea(tipoTarea, prioridad, descripcion);
   tareas.push(tarea);
   tareaID++;
 
+  console.log(`crea la tarea a partir de su funcion constructor, le asigna una id (autoincremental) y la agrega al array de tareas pendientes. 
+  ----------
+  ${tarea}
+  ---------
+  `);
+  
   alert(` Se ha ingresado la nueva tarea a la lista de pendientes:
 
 ========================
@@ -727,6 +807,7 @@ Fecha: ${tarea.creacion}
 
 const tareaRealizada = () => {
   let confirmarTarea = false;
+  console.log("modulo marcar tarea\n Solicita el ID de la tarea que se desea marcar como completada y brinda informacion de la misma. Chequeando previamente que exista");
   let tareaBuscada = parseInt(
     prompt(`Ingrese el ID de la tarea que desea revisar`)
   );
@@ -737,7 +818,7 @@ const tareaRealizada = () => {
   ) {
     while (!confirmarTarea) {
       const marcarTarea = tareas.find((tarea) => tarea.id === tareaBuscada);
-
+      console.log("Solicita confirmación para cambiar el estado de la tarea seleccionada a 'completada'.");
       let opcion = parseInt(
         prompt(`
 Desea marcar la tarea como completada y eliminarla de la lista de pendientes?
@@ -755,6 +836,7 @@ Estado: ${marcarTarea.estado}
 
       switch (opcion) {
         case 1:
+          console.log("confirma y se cambia el estado");
           marcarTarea.estado = "Completada";
           alert(`La tarea:
   ----------------
@@ -772,6 +854,7 @@ Estado: ${marcarTarea.estado}
           confirmarTarea = true;
           break;
         case 2:
+          console.log("cancela la operación, la tarea mantiene su estado original 'pendiente'.");
           alert(`La tarea:
   ----------------
 ID: ${marcarTarea.id}
@@ -785,6 +868,7 @@ Estado: ${marcarTarea.estado}
           confirmarTarea = true;
           break;
         default:
+          console.log("el usuario ingresa un valor incorrecto o fuera del rango");
           alert("Opcion invalida");
           break;
       }
@@ -798,7 +882,11 @@ Estado: ${marcarTarea.estado}
 
 const menuInsumos = () => {
   menuInsumosState = true;
+  console.log(`====================
+  Ingreso al Menu de Insumos
+  ==================`);
   while (menuInsumosState) {
+    console.log("solicitud de opción de funcionalidad del menu de Agentes.");
     let seleccionInsumos = parseInt(
       prompt(` Listado de Stock de Insumos:
 
@@ -810,19 +898,34 @@ const menuInsumos = () => {
     );
     switch (seleccionInsumos) {
       case 1:
+        console.log(
+          "seleccionada opcion 1: ver Insumos (array completo y filtrado por tipoInsumo)"
+        );
         verInsumos();
         break;
       case 2:
+        console.log(
+          "seleccionada opcion 2: Administrar Insumos (Buscar, modificar stock o eliminar del sistema)"
+        );
         administrarInsumos();
         break;
       case 3:
+        console.log(
+          "seleccionada opcion 3: agregar Insumo nuevo"
+        );
         agregarInsumos();
         break;
       case 4:
+        console.log(
+          "seleccionada opcion 4: Termina el ciclo y ejecuta la funcion menuInicio para volver al menu anterior"
+        );
         menuInicio();
         menuInsumosState = false;
         break;
       default:
+        console.log(
+          `el usuario ingresa: ${seleccionInsumos}. Fuera del rango de opciones de menú o no es un número.`
+        );
         alert("Seleccion inválida, por favor indique nuevamente la opción");
         break;
     }
@@ -831,6 +934,7 @@ const menuInsumos = () => {
 
 // Funciones Menu Insumos
 const verInsumos = () => {
+  console.log("Solicita opcion preferida para visualizar lista de insumos");
   let opcionVistaInsumos = parseInt(
     prompt(` Base de Stock e Insumos de Quimishop SRL
 
@@ -845,6 +949,7 @@ const verInsumos = () => {
   );
   switch (opcionVistaInsumos) {
     case 1:
+      console.log("opcion 1: vista completa. Lista Generada a partir de un map del array original");
       let listaInsumos = insumos.map(
         (objeto) =>
           `${objeto.tipoInsumo}: ${objeto.nombreInsumo} - Stock: ${objeto.stock} unidades`
@@ -856,6 +961,7 @@ const verInsumos = () => {
       }
       break;
     case 2:
+      console.log("opcion 2: vista administrativo. Lista Generada a partir de un map del array original filtrado por tipo");
       let filtroAdmin = insumos.filter(
         (objeto) => objeto.tipoInsumo === "Administrativo"
       );
@@ -870,6 +976,7 @@ const verInsumos = () => {
       }
       break;
     case 3:
+      console.log("opcion 3: vista Fabricación. Lista Generada a partir de un map del array original filtrado por tipo");
       let filtroFabricacion = insumos.filter(
         (objeto) => objeto.tipoInsumo === "Fabricación"
       );
@@ -884,6 +991,7 @@ const verInsumos = () => {
       }
       break;
     case 4:
+      console.log("opcion 4: vista Materia Prima. Lista Generada a partir de un map del array original filtrado por tipo");
       let filtroMaterias = insumos.filter(
         (objeto) => objeto.tipoInsumo === "Materias Primas"
       );
@@ -898,6 +1006,7 @@ const verInsumos = () => {
       }
       break;
     case 5:
+      console.log("opcion 5: vista faltantes. Lista Generada a partir de un map del array original filtrado por stock");
       let filtroFaltantes = insumos.filter((objeto) => objeto.stock === 0);
       let listaFaltantes = filtroFaltantes.map(
         (objeto) =>
@@ -910,9 +1019,11 @@ const verInsumos = () => {
       }
       break;
     case 6:
+      console.log("opcion 6: volver al menu de insumos");
       alert("Volviendo al Menu de Insumos");
       break;
     default:
+      console.log("dato invalido al seleccionar opción");
       alert("Seleccion inválida, por favor indique nuevamente la opción");
       break;
   }
@@ -1000,10 +1111,13 @@ const agregarInsumos = () => {
   let stocknuevoInsumo;
   let selecCategoria;
 
+console.log("Iniciado modulo para agregar nuevos insumos");
+
   do {
     nombreNuevoInsumo = prompt(
       "Indique el nombre del insumo a agregar:"
     ).toUpperCase();
+    console.log("solicita nombre del insumo chequeando que no sea un numero o esté vacío. En caso de ser inválido, volverá a pedir el dato");
   } while (!isNaN(nombreNuevoInsumo) || nombreNuevoInsumo === null);
 
   while (
@@ -1012,6 +1126,7 @@ const agregarInsumos = () => {
     selecCategoria < 1 ||
     selecCategoria > 3
   ) {
+    console.log("solicita seleccion de categoria para el insumo ingresado entre 3 opciones");
     selecCategoria = parseInt(
       prompt(`Seleccione el tipo de tarea para su clasificación:
 
@@ -1022,15 +1137,19 @@ const agregarInsumos = () => {
     );
     switch (selecCategoria) {
       case 1:
+        console.log("seleccionado administrativo");
         categoriaNuevoInsumo = "Administrativo";
         break;
       case 2:
+        console.log("seleccionado fabricación");
         categoriaNuevoInsumo = "Fabricación";
         break;
       case 3:
+        console.log("seleccionado materias primas");
         categoriaNuevoInsumo = "Materias Primas";
         break;
       default:
+        console.log("el dato ingresado no esta dentro del rango o es invalido");
         alert("Opción inexistente");
         break;
     }
@@ -1040,6 +1159,7 @@ const agregarInsumos = () => {
     stocknuevoInsumo = parseInt(
       prompt("Indique la cantidad del insumo a agregar:")
     );
+    console.log("solicita el stock del insumo chequeando que sea un numero y no esté vacío. En caso de ser inválido, volverá a pedir el dato");
   } while (isNaN(stocknuevoInsumo) || stocknuevoInsumo === null);
 
   let nuevoInsumo = new Insumo(
@@ -1048,7 +1168,7 @@ const agregarInsumos = () => {
     stocknuevoInsumo
   );
   insumos.push(nuevoInsumo);
-
+console.log("crea el insumo a partir de su funcion constructor, lo agrega al array y muestra los datos del mismo");
   alert(
     `Se agregaron ${nuevoInsumo.stock} unidades de ${nuevoInsumo.nombreInsumo} a la lista, bajo la categoria ${nuevoInsumo.tipoInsumo}`
   );
