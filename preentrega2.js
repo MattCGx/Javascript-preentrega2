@@ -266,6 +266,7 @@ const menuAgentes = () => {
 // Funciones Menu Agentes
 
 const verNomina = () => {
+  console.log("Modulo visualizacion de Nomina\n Se solicita opcion del 1 al 6 para visualizar arrays entero o filtrado por sectores");
   let seleccionNomina = parseInt(
     prompt(` Nómina de Empleados de Quimishop SRL.
 
@@ -281,6 +282,7 @@ const verNomina = () => {
   );
   switch (seleccionNomina) {
     case 1:
+      console.log("opcion 1: visualiza nomina completa a partir de un mapeo del array original");
       let nomina = agentes.map(
         (agente) =>
           `${agente.nombre} - ${agente.posicion} en ${agente.sector} - Legajo: ${agente.legajo} `
@@ -292,6 +294,7 @@ const verNomina = () => {
       }
       break;
     case 2:
+      console.log("opcion 2: visualiza ventas a partir de un mapeo del array original filtrado por la propiedad sector, verificando si hay o no agentes en dicho sector");
       let nominaVentas = agentes.filter((agente) => agente.sector === "Ventas");
       let mostrarVentas = nominaVentas.map(
         (agente) =>
@@ -304,6 +307,7 @@ const verNomina = () => {
       }
       break;
     case 3:
+      console.log("opcion 3: visualiza reposición a partir de un mapeo del array original filtrado por la propiedad sector, verificando si hay o no agentes en dicho sector");
       let nominaRepo = agentes.filter(
         (agente) => agente.sector === "Reposición"
       );
@@ -318,6 +322,7 @@ const verNomina = () => {
       }
       break;
     case 4:
+      console.log("opcion 4: visualiza fabricación a partir de un mapeo del array original filtrado por la propiedad sector, verificando si hay o no agentes en dicho sector");
       let nominaFab = agentes.filter(
         (agente) => agente.sector === "Fabricación"
       );
@@ -332,6 +337,7 @@ const verNomina = () => {
       }
       break;
     case 5:
+      console.log("opcion 5: visualiza facturación a partir de un mapeo del array original filtrado por la propiedad sector, verificando si hay o no agentes en dicho sector");
       let nominaFact = agentes.filter(
         (agente) => agente.sector === "Facturación"
       );
@@ -346,9 +352,11 @@ const verNomina = () => {
       }
       break;
     case 6:
+      console.log("opcion 6: Cancela la visualizacion, solo ejecuta una alerta y devuelve al menu anterior");
       alert("Volviendo al Menu de Administracion de Agentes");
       break;
     default:
+      console.log(`el usuario ingresa: ${seleccionNomina}. Fuera del rango de opciones de menu o no es un número.`);
       alert("Seleccion inválida, por favor indique nuevamente la opción");
       break;
   }
@@ -360,9 +368,11 @@ const altaAgente = () => {
   let sector;
   let selecPosicion;
   let selecSector;
-
+console.log("Modulo de creación de nuevo agente");
   do {
     nombre = prompt("Indique nombre y apellido del nuevo agente").toUpperCase();
+    console.log(`Solicita nombre y apellido al usuario, si este ingresa un dato no-válido, volver a solicitarlo."
+    Dato ingresado ${nombre}`);
   } while (!isNaN(nombre) || nombre === null);
 
   while (
@@ -371,6 +381,7 @@ const altaAgente = () => {
     selecPosicion < 1 ||
     selecPosicion > 3
   ) {
+    console.log("Menu de seleccion de puesto laboral o posicion en la empresa");
     selecPosicion = parseInt(
       prompt(`Seleccione el puesto en la empresa para ${nombre}.
 
@@ -381,15 +392,19 @@ const altaAgente = () => {
     );
     switch (selecPosicion) {
       case 1:
+        console.log("seleccionado operador");
         posicion = "Operador";
         break;
       case 2:
+        console.log("seleccionado encargado");
         posicion = "Encargado";
         break;
       case 3:
+        console.log("seleccionado supervisor");
         posicion = "Supervisor";
         break;
       default:
+        console.log("seleccion fuera del rango correcto");
         alert("Opción inexistente");
         break;
     }
@@ -401,6 +416,7 @@ const altaAgente = () => {
     selecSector < 1 ||
     selecSector > 4
   ) {
+    console.log("menu de seleccion del sector para el nuevo agente");
     selecSector = parseInt(
       prompt(`Seleccione el sector de en la empresa al que ingresa el ${posicion}: ${nombre}.
 
@@ -412,25 +428,32 @@ const altaAgente = () => {
     );
     switch (selecSector) {
       case 1:
+        console.log("seleeccionado facturación");
         sector = "Facturación";
         break;
       case 2:
+        console.log("seleccionado ventas");
         sector = "Ventas";
         break;
       case 3:
+        console.log("seleccionado fabricación");
         sector = "Fabricación";
         break;
       case 4:
+        console.log("seleccionado reposición");
         sector = "Reposición";
         break;
       default:
+        console.log("seleccion fuera del rango correcto");
         alert("Opción inexistente");
         break;
     }
   }
   let agente = new Agente(nombre, posicion, sector);
   agentes.push(agente);
-
+console.log( `Creado el nuevo agente:
+${agente} 
+y se muestran sus datos por alert`);
   alert(` Se ha ingresado al nuevo agente a la base de datos:
 
 ========================
@@ -443,7 +466,9 @@ Legajo: ${agente.legajo}
 };
 
 const bajaAgente = () => {
+  console.log("Modulo baja de agentes");
   let confirmar = false;
+  console.log("solicita NOMBRE o LEGAJO y verifica el tipo de dato ingresado para coincidir con una u otra opción.");
   let agenteEliminado = prompt(
     "Ingrese el NOMBRE o el numero de LEGAJO del agente que desea dar de baja"
   );
@@ -452,6 +477,8 @@ const bajaAgente = () => {
     !isNaN(agenteEliminado) &&
     agentes.some((agente) => agente.legajo === parseInt(agenteEliminado))
   ) {
+
+    console.log(`Se determina Agente ingresado por LEGAJO ${agenteEliminado}, se identifica su existencia y se solicita confirmación antes de eliminar`);
     while (!confirmar) {
       const agentePorLegajo = agentes.find(
         (agente) => agente.legajo === parseInt(agenteEliminado)
@@ -493,6 +520,8 @@ const bajaAgente = () => {
     isNaN(agenteEliminado) &&
     agentes.some((agente) => agente.nombre === agenteEliminado.toUpperCase())
   ) {
+
+    console.log(`Se determina Agente ingresado por NOMBRE: ${agenteEliminado.toUpperCase()}, se identifica su existencia y se solicita confirmacion antes de eliminar`);
     while (!confirmar) {
       const agentePorNombre = agentes.find(
         (agente) => agente.nombre === agenteEliminado.toUpperCase()
@@ -514,6 +543,7 @@ const bajaAgente = () => {
 
       switch (confirmacion) {
         case 1:
+          console.log("confirma eliminación");
           alert(
             `Se eliminó el agente: ${agentePorNombre.nombre} del sector ${agentePorNombre.sector}`
           );
@@ -523,15 +553,18 @@ const bajaAgente = () => {
           confirmar = true;
           break;
         case 2:
+          console.log("cancela eliminación");
           alert("Baja Cancelada");
           confirmar = true;
           break;
         default:
+          console.log("selecciona una opcion inválida o fuera de rango de opciones");
           alert("Opcion inválida");
           break;
       }
     }
   } else {
+    console.log(`el dato ingresado ${agenteEliminado} no coincide con ningun NOMBRE ni LEGAJO existente.`);
     alert("No se encontró ningún agente con el legajo o nombre proporcionado.");
   }
 };
