@@ -103,18 +103,18 @@ let tareas = [
 let tareasCompletadas = [];
 let insumos = [
   { nombreInsumo: "REACTIVOS DE PH", tipoInsumo: "Fabricación", stock: 500 },
-  { nombreInsumo: "SILICONA", tipoInsumo: "Materias Primas", stock: 1000 },
-  { nombreInsumo: "DETERGENTE", tipoInsumo: "Materias Primas", stock: 750 },
-  { nombreInsumo: "PAPEL TOALLA", tipoInsumo: "Administrativo", stock: 300 },
-  { nombreInsumo: "EMULSIONANTE", tipoInsumo: "Materias Primas", stock: 200 },
-  { nombreInsumo: "CERA", tipoInsumo: "Materias Primas", stock: 0 },
   { nombreInsumo: "GUANTES", tipoInsumo: "Fabricación", stock: 600 },
   { nombreInsumo: "FILTROS", tipoInsumo: "Fabricación", stock: 450 },
-  { nombreInsumo: "CEPILLOS", tipoInsumo: "Fabricación", stock: 0 },
+  { nombreInsumo: "CEPILLOS", tipoInsumo: "Fabricación", stock:0},
+  { nombreInsumo: "SILICONA", tipoInsumo: "Materias Primas", stock: 1000 },
+  { nombreInsumo: "DETERGENTE", tipoInsumo: "Materias Primas", stock: 750 },
+  { nombreInsumo: "EMULSIONANTE", tipoInsumo: "Materias Primas", stock: 200 },
+  { nombreInsumo: "CERA", tipoInsumo: "Materias Primas", stock:0},
   { nombreInsumo: "ALCOHOL", tipoInsumo: "Materias Primas", stock: 300 },
   { nombreInsumo: "PAPEL DE OFICINA", tipoInsumo: "Administrativo", stock: 500,},
   { nombreInsumo: "BOLÍGRAFOS", tipoInsumo: "Administrativo", stock: 200 },
   { nombreInsumo: "CINTA ADHESIVA", tipoInsumo: "Administrativo", stock: 150 },
+  { nombreInsumo: "PAPEL TOALLA", tipoInsumo: "Administrativo", stock: 300 },
 ];
 
 // =================================================================
@@ -742,37 +742,184 @@ const menuInsumos = () => {
   menuInsumosState = true;
   while (menuInsumosState) {
     let seleccionInsumos = parseInt(
-      prompt(` Nómina de Empleados de Quimishop SRL.
+      prompt(` Listado de Stock de Insumos:
 
-        1- Ver Nómina
-        2- Administrar Agente
-        3- Alta Nuevo Agente  
-        4- Baja Agente      
-        5- Volver
+        1- Ver Insumos
+        2- Buscar y Administrar Insumos
+        3- Agregar Nuevo Insumo        
+        4- Volver
         `)
     );
     switch (seleccionInsumos) {
       case 1:
-        verNomina();
+        verInsumos();
         break;
       case 2:
-        administrarAgente();
+        administrarInsumos();
         break;
       case 3:
-        altaAgente();
+        agregarInsumos();
         break;
       case 4:
-        bajaAgente();
-        break;
-      case 5:
         menuInicio();
         menuInsumosState = false;
-        break;
+        break;       
       default:
         alert("Seleccion inválida, por favor indique nuevamente la opción");
         break;
     }
   }
+};
+
+// Funciones Menu Insumos
+const verInsumos = () => {
+  let opcionVistaInsumos = parseInt(
+    prompt(` Base de Stock e Insumos de Quimishop SRL
+
+      
+      1- Lista completa de Insumos
+      2- Ver Solo Administrativos
+      3- Ver Solo Fabricacion 
+      4- Ver Solo Materias Primas
+      5- Ver Faltantes    
+      6- Volver
+      `)
+  );
+  switch (opcionVistaInsumos) {
+    case 1:
+      let listaInsumos = insumos.map(
+        (objeto) =>
+          `${objeto.tipoInsumo}: ${objeto.nombreInsumo} - Stock: ${objeto.stock} unidades`
+      );
+      if (listaInsumos.length > 0) {
+        alert(listaInsumos.join("\n"));
+      } else {
+        alert("Empresa desabastecida por completo");
+      }
+      break;
+    case 2:
+      let filtroAdmin = insumos.filter((objeto) => objeto.tipoInsumo === "Administrativo");
+      let listaAdmin = filtroAdmin.map(
+        (objeto) =>
+          `${objeto.tipoInsumo}: ${objeto.nombreInsumo} - Stock: ${objeto.stock} unidades`
+      );
+      if (listaAdmin.length > 0) {
+        alert(listaAdmin.join("\n"));
+      } else {
+        alert("Sin recursos de al categoría Administrativo");
+      }
+      break;
+    case 3:
+      let filtroFabricacion = insumos.filter(
+        (objeto) => objeto.tipoInsumo === "Fabricación"
+      );
+      let listaFabricacion = filtroFabricacion.map(
+        (objeto) =>
+          `${objeto.tipoInsumo}: ${objeto.nombreInsumo} - Stock: ${objeto.stock} unidades`
+      );
+      if (listaFabricacion.length > 0) {
+        alert(listaFabricacion.join("\n"));
+      } else {
+        alert("Sin recursos de al categoría Fabricación");
+      }
+      break;
+    case 4:
+      let filtroMaterias = insumos.filter(
+        (objeto) => objeto.tipoInsumo === "Materias Primas"
+      );
+      let listaMaterias = filtroMaterias.map(
+        (objeto) =>
+          `${objeto.tipoInsumo}: ${objeto.nombreInsumo} - Stock: ${objeto.stock} unidades`
+      );
+      if (listaMaterias.length > 0) {
+        alert(listaMaterias.join("\n"));
+      } else {
+        alert("Sin Materias Primas");
+      }
+      break;
+    case 5:
+      let filtroFaltantes = insumos.filter(
+        (objeto) => objeto.stock === 0
+      );
+      let listaFaltantes = filtroFaltantes.map(
+        (objeto) =>
+          `${objeto.tipoInsumo}: ${objeto.nombreInsumo} - Stock: ${objeto.stock} unidades`
+      );
+      if (listaFaltantes.length > 0) {
+        alert(listaFaltantes.join("\n"));
+      } else {
+        alert("Sin Faltantes");
+      }
+      break;
+    case 6:
+      alert("Volviendo al Menu de Insumos");
+      break;
+    default:
+      alert("Seleccion inválida, por favor indique nuevamente la opción");
+      break;
+  }
+
+
+}; 
+
+const administrarInsumos = () => {};
+
+
+const agregarInsumos = () => {
+
+  let nombreNuevoInsumo;
+  let categoriaNuevoInsumo;
+  let stocknuevoInsumo;
+  let selecCategoria;
+  
+
+  do {
+    nombreNuevoInsumo = prompt(
+      "Indique el nombre del insumo a agregar:"
+    ).toUpperCase();
+  } while (!isNaN(nombreNuevoInsumo) || nombreNuevoInsumo === null);
+
+  while (
+    isNaN(selecCategoria) ||
+    selecCategoria === null ||
+    selecCategoria < 1 ||
+    selecCategoria > 3
+  ) {
+    selecCategoria = parseInt(
+      prompt(`Seleccione el tipo de tarea para su clasificación:
+
+1- Administrativo
+2- Fabricación
+3- Materias Primas
+`)
+    );
+    switch (selecCategoria) {
+      case 1:
+        categoriaNuevoInsumo = "Administrativo";
+        break;
+      case 2:
+        categoriaNuevoInsumo = "Fabricación";
+        break;
+      case 3:
+        categoriaNuevoInsumo = "Materias Primas";
+        break;
+      default:
+        alert("Opción inexistente");
+        break;
+    }
+  }
+ 
+  do {
+    stocknuevoInsumo = parseInt(prompt(
+      "Indique el nombre del insumo a agregar:"
+    ));
+  } while (isNaN(stocknuevoInsumo) || stocknuevoInsumo === null);
+
+  let nuevoInsumo = new Insumo(nombreNuevoInsumo, categoriaNuevoInsumo, stocknuevoInsumo);
+  insumos.push(nuevoInsumo);
+
+alert(`Se agregaron ${nuevoInsumo.stock} unidades de ${nuevoInsumo.nombreInsumo} a la lista, bajo la categoria ${nuevoInsumo.tipoInsumo}`);
+
 };
 
 menuInicio();
