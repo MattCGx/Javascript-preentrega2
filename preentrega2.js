@@ -105,13 +105,17 @@ let insumos = [
   { nombreInsumo: "REACTIVOS DE PH", tipoInsumo: "Fabricación", stock: 500 },
   { nombreInsumo: "GUANTES", tipoInsumo: "Fabricación", stock: 600 },
   { nombreInsumo: "FILTROS", tipoInsumo: "Fabricación", stock: 450 },
-  { nombreInsumo: "CEPILLOS", tipoInsumo: "Fabricación", stock:0},
+  { nombreInsumo: "CEPILLOS", tipoInsumo: "Fabricación", stock: 0 },
   { nombreInsumo: "SILICONA", tipoInsumo: "Materias Primas", stock: 1000 },
   { nombreInsumo: "DETERGENTE", tipoInsumo: "Materias Primas", stock: 750 },
   { nombreInsumo: "EMULSIONANTE", tipoInsumo: "Materias Primas", stock: 200 },
-  { nombreInsumo: "CERA", tipoInsumo: "Materias Primas", stock:0},
+  { nombreInsumo: "CERA", tipoInsumo: "Materias Primas", stock: 0 },
   { nombreInsumo: "ALCOHOL", tipoInsumo: "Materias Primas", stock: 300 },
-  { nombreInsumo: "PAPEL DE OFICINA", tipoInsumo: "Administrativo", stock: 500,},
+  {
+    nombreInsumo: "PAPEL DE OFICINA",
+    tipoInsumo: "Administrativo",
+    stock: 500,
+  },
   { nombreInsumo: "BOLÍGRAFOS", tipoInsumo: "Administrativo", stock: 200 },
   { nombreInsumo: "CINTA ADHESIVA", tipoInsumo: "Administrativo", stock: 150 },
   { nombreInsumo: "PAPEL TOALLA", tipoInsumo: "Administrativo", stock: 300 },
@@ -558,18 +562,21 @@ const verTareas = () => {
     (tarea) =>
       `ID:${tarea.id} - ${tarea.descripcion} en ${tarea.tipo} - con prioridad: ${tarea.prioridad} - ${tarea.estado}`
   );
-    if (listaTareas.length > 0) {
+  if (listaTareas.length > 0) {
     alert(listaTareas.join("\n ------- \n"));
   } else {
     alert("Sin Tareas Pendientes");
   }
 
   if (tareasCompletadas.length > 0) {
-    let listaCompletadas = tareasCompletadas.map((tarea) => `ID:${tarea.id} - ${tarea.descripcion} en ${tarea.tipo} - ${tarea.estado}`);
+    let listaCompletadas = tareasCompletadas.map(
+      (tarea) =>
+        `ID:${tarea.id} - ${tarea.descripcion} en ${tarea.tipo} - ${tarea.estado}`
+    );
     alert(`Tareas Completadas:
     ==================
     ${listaCompletadas.join("\n ------- \n")}`);
-  };
+  }
 };
 
 const agregarTarea = () => {
@@ -669,19 +676,20 @@ Fecha: ${tarea.creacion}
 };
 
 const tareaRealizada = () => {
+  let confirmarTarea = false;
+  let tareaBuscada = parseInt(
+    prompt(`Ingrese el ID de la tarea que desea revisar`)
+  );
 
-let confirmarTarea = false;
-let tareaBuscada = parseInt(prompt(`Ingrese el ID de la tarea que desea revisar`));
+  if (
+    !isNaN(tareaBuscada) &&
+    tareas.some((tarea) => tarea.id === tareaBuscada)
+  ) {
+    while (!confirmarTarea) {
+      const marcarTarea = tareas.find((tarea) => tarea.id === tareaBuscada);
 
-if (
-  !isNaN(tareaBuscada) &&
-  tareas.some((tarea) => tarea.id === tareaBuscada)
-) {
-  while (!confirmarTarea) {
-const marcarTarea = tareas.find((tarea) => tarea.id === tareaBuscada);
-
-
-let opcion = parseInt(prompt(`
+      let opcion = parseInt(
+        prompt(`
 Desea marcar la tarea como completada y eliminarla de la lista de pendientes?
 1- Si
 2- No
@@ -692,12 +700,13 @@ Tipo: ${marcarTarea.tipo}
 Prioridad: ${marcarTarea.prioridad}
 Fecha de Creación: ${marcarTarea.creacion}
 Estado: ${marcarTarea.estado}
-`));
+`)
+      );
 
-switch (opcion) {
-  case 1: 
-  marcarTarea.estado = "Completada";
-  alert(`La tarea:
+      switch (opcion) {
+        case 1:
+          marcarTarea.estado = "Completada";
+          alert(`La tarea:
   ----------------
 ID: ${marcarTarea.id}
 Descripción: ${marcarTarea.descripcion}
@@ -708,12 +717,12 @@ Estado: ${marcarTarea.estado}
   ----------------
   se ha eliminado de la lista de pendientes.`);
 
-  tareasCompletadas.push(marcarTarea);
-  tareas = tareas.filter((tarea) => tarea.id !== marcarTarea.id);
-  confirmarTarea = true;
-  break;
-  case 2: 
-  alert(`La tarea:
+          tareasCompletadas.push(marcarTarea);
+          tareas = tareas.filter((tarea) => tarea.id !== marcarTarea.id);
+          confirmarTarea = true;
+          break;
+        case 2:
+          alert(`La tarea:
   ----------------
 ID: ${marcarTarea.id}
 Descripción: ${marcarTarea.descripcion}
@@ -723,16 +732,15 @@ Fecha de Creación: ${marcarTarea.creacion}
 Estado: ${marcarTarea.estado}
   ----------------
   permanecerá en la lista de pendientes.`);
-  confirmarTarea = true;
-  break;
-  default:
-    alert("Opcion invalida")
-    break;
+          confirmarTarea = true;
+          break;
+        default:
+          alert("Opcion invalida");
+          break;
+      }
+    }
+  }
 };
-};
-};
-};
-
 
 // =================================================================================
 
@@ -763,7 +771,7 @@ const menuInsumos = () => {
       case 4:
         menuInicio();
         menuInsumosState = false;
-        break;       
+        break;
       default:
         alert("Seleccion inválida, por favor indique nuevamente la opción");
         break;
@@ -798,7 +806,9 @@ const verInsumos = () => {
       }
       break;
     case 2:
-      let filtroAdmin = insumos.filter((objeto) => objeto.tipoInsumo === "Administrativo");
+      let filtroAdmin = insumos.filter(
+        (objeto) => objeto.tipoInsumo === "Administrativo"
+      );
       let listaAdmin = filtroAdmin.map(
         (objeto) =>
           `${objeto.tipoInsumo}: ${objeto.nombreInsumo} - Stock: ${objeto.stock} unidades`
@@ -838,9 +848,7 @@ const verInsumos = () => {
       }
       break;
     case 5:
-      let filtroFaltantes = insumos.filter(
-        (objeto) => objeto.stock === 0
-      );
+      let filtroFaltantes = insumos.filter((objeto) => objeto.stock === 0);
       let listaFaltantes = filtroFaltantes.map(
         (objeto) =>
           `${objeto.tipoInsumo}: ${objeto.nombreInsumo} - Stock: ${objeto.stock} unidades`
@@ -858,20 +866,89 @@ const verInsumos = () => {
       alert("Seleccion inválida, por favor indique nuevamente la opción");
       break;
   }
+};
 
+const administrarInsumos = () => {
+  let confirmarModificacionInsumo = false;
+  let insumoBuscado = prompt(
+    "Ingrese nombre del insumo que desea visualizar y/o modificar"
+  ).toUpperCase();
 
-}; 
+  if (
+    isNaN(insumoBuscado) &&
+    insumos.some((objeto) => objeto.nombreInsumo === insumoBuscado)
+  ) {
+    while (!confirmarModificacionInsumo) {
+      const modificarInsumo = insumos.find(
+        (insumo) => insumo.nombreInsumo === insumoBuscado
+      );
 
-const administrarInsumos = () => {};
+      let opcion = parseInt(
+        prompt(`
 
+Insumo encontrado: 
+--------------
+Nombre: ${modificarInsumo.nombreInsumo}
+Tipo: ${modificarInsumo.tipoInsumo}
+Stock: ${modificarInsumo.stock}
+--------------
+
+Si desea modificarlo o eliminarlo indiquelo a continuacion
+1- Modificar Stock
+2- Eliminar
+3- Cancelar
+`)
+      );
+
+      switch (opcion) {
+        case 1:
+          modificarInsumo.stock = parseInt(
+            prompt(
+              `Indique el nuevo valor de Stock para ${modificarInsumo.nombreInsumo}`
+            )
+          );
+          alert(`Insumo Modificado: 
+          --------------
+          Nombre: ${modificarInsumo.nombreInsumo}
+          Tipo: ${modificarInsumo.tipoInsumo}
+          Stock: ${modificarInsumo.stock}
+          --------------`);
+          confirmarModificacionInsumo = true;
+          break;
+        case 2:
+          alert(`El Insumo::
+          --------------
+          Nombre: ${modificarInsumo.nombreInsumo}
+          Tipo: ${modificarInsumo.tipoInsumo}
+          Stock: ${modificarInsumo.stock}
+          --------------
+          ha sido eliminado del sistema`);
+
+          insumos = insumos.filter(
+            (objetoEliminado) =>
+              objetoEliminado.nombreInsumo !== modificarInsumo.nombreInsumo
+          );
+          confirmarModificacionInsumo = true;
+          break;
+        case 3:
+          alert("Regresando al menu anterior");
+          confirmarModificacionInsumo = true;
+          break;
+        default:
+          alert("Opcion invalida");
+          break;
+      }
+    }
+  } else {
+    alert("No se encontró el Insumo indicado");
+  }
+};
 
 const agregarInsumos = () => {
-
   let nombreNuevoInsumo;
   let categoriaNuevoInsumo;
   let stocknuevoInsumo;
   let selecCategoria;
-  
 
   do {
     nombreNuevoInsumo = prompt(
@@ -908,18 +985,23 @@ const agregarInsumos = () => {
         break;
     }
   }
- 
+
   do {
-    stocknuevoInsumo = parseInt(prompt(
-      "Indique el nombre del insumo a agregar:"
-    ));
+    stocknuevoInsumo = parseInt(
+      prompt("Indique la cantidad del insumo a agregar:")
+    );
   } while (isNaN(stocknuevoInsumo) || stocknuevoInsumo === null);
 
-  let nuevoInsumo = new Insumo(nombreNuevoInsumo, categoriaNuevoInsumo, stocknuevoInsumo);
+  let nuevoInsumo = new Insumo(
+    nombreNuevoInsumo,
+    categoriaNuevoInsumo,
+    stocknuevoInsumo
+  );
   insumos.push(nuevoInsumo);
 
-alert(`Se agregaron ${nuevoInsumo.stock} unidades de ${nuevoInsumo.nombreInsumo} a la lista, bajo la categoria ${nuevoInsumo.tipoInsumo}`);
-
+  alert(
+    `Se agregaron ${nuevoInsumo.stock} unidades de ${nuevoInsumo.nombreInsumo} a la lista, bajo la categoria ${nuevoInsumo.tipoInsumo}`
+  );
 };
 
 menuInicio();
